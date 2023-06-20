@@ -1,0 +1,52 @@
+[
+  {
+  "cardName": "Bulbasaur",
+  "cardDescription": "Há uma semente de planta em suas costas desde o dia em que este Pokémon nasceu. A semente cresce lentamente.",
+  "attr1": "25",
+  "attr2": "10",
+  "attr3": "90",
+  "cardImage": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png",
+  "cardRare": "raro",
+  "cardTrunfo": false
+  },
+  {
+    "cardName": "Charmander",
+    "cardDescription": "Tem preferência por coisas quentes. Quando chove, diz-se que o vapor jorra da ponta de sua cauda.",
+    "attr1": "80",
+    "attr2": "50",
+    "attr3": "70",
+    "cardImage": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png",
+    "cardRare": "muito raro",
+    "cardTrunfo": true
+  },
+  {
+    "cardName": "Squirtle",
+    "cardDescription": "Quando retrai seu longo pescoço em sua concha, esguicha água com força vigorosa.",
+    "attr1": "65",
+    "attr2": "60",
+    "attr3": "85",
+    "cardImage": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png",
+    "cardRare": "muito raro",
+    "cardTrunfo": false
+  },
+  {
+    "cardName": "Pikachu",
+    "cardDescription": "Quando está com raiva, descarrega imediatamente a energia armazenada nas bolsas de suas bochechas.",
+    "attr1": "60",
+    "attr2": "70",
+    "attr3": "50",
+    "cardImage": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png",
+    "cardRare": "normal",
+    "cardTrunfo": false
+  },
+  {
+    "cardName": "Gengar",
+    "cardDescription": "Para roubar a vida de seu alvo, ele se esconde na sombra da presa e silenciosamente espera por uma oportunidade.",
+    "attr1": "70",
+    "attr2": "75",
+    "attr3": "60",
+    "cardImage": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/094.png",
+    "cardRare": "raro",
+    "cardTrunfo": false
+  }
+]
