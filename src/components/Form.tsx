@@ -42,92 +42,93 @@ export default function Form(props: PropsForm) {
   }, []);
 
   return (
-    <form className='flex flex-col border border-black'>
+    <form className="flex flex-col md:w-1/2 md:justify-around">
 
-      <label htmlFor="name-input" className='border border-black'>
-        Nome:
+      <h1 className="font-bold my-2 text-center text-[#2FC18C]">
+        ADICIONE NOVA CARTA
+      </h1>
+
+      <label htmlFor="name-input" className="p-1">
+        <span>Nome:</span>
+        <br />
         <input
           type="text"
           data-testid="name-input"
-          className='border border-black'
+          className="border-b border-black w-full"
           name='cardName'
           onChange={({ target }) => onInputChange(target)}
           value={cardName}
         />
       </label>
 
-      <label htmlFor="description-input" className='border border-black'>
-        Descrição:
+      <label htmlFor="description-input" className="p-1">
+        <span>Descrição:</span>
+        <br />
         <textarea
           data-testid="description-input"
-          className='border border-black'
+          className="border-b border-black w-full"
           name="cardDescription"
           onChange={({ target }) => onInputChange(target)}
           value={cardDescription}
         />
       </label>
 
-      <label htmlFor="attr1-input" className='border border-black'>
-        Attr01:
+      <label htmlFor="attr1-input" className="flex items-center justify-end p-2">
+        <span>Attr01:</span>
         <input
-          type="number"
+          type="text"
           data-testid="attr1-input"
-          className='border border-black'
+          className="border border-black mx-2 rounded-md text-center w-16"
           name="cardAttr1"
           onChange={({ target }) => onInputChange(target)}
           value={cardAttr1}
-          min="0"
-          max="90"
         />
       </label>
 
-      <label htmlFor="attr2-input" className='border border-black'>
-        Attr02:
+      <label htmlFor="attr2-input" className="flex items-center justify-end p-2">
+        <span>Attr02:</span>
         <input
-          type="number"
+          type="text"
           data-testid="attr2-input"
-          className='border border-black'
+          className="border border-black mx-2 rounded-md text-center w-16"
           name="cardAttr2"
           onChange={({ target }) => onInputChange(target)}
           value={cardAttr2}
-          min="0"
-          max="90"
         />
       </label>
 
-      <label htmlFor="attr3-input" className='border border-black'>
-        Attr03:
+      <label htmlFor="attr3-input" className="flex items-center justify-end p-2">
+        <span>Attr03:</span>
         <input
-          type="number"
+          type="text"
           data-testid="attr3-input"
-          className='border border-black'
+          className="border border-black mx-2 rounded-md text-center w-16"
           name="cardAttr3"
           onChange={({ target }) => onInputChange(target)}
           value={cardAttr3}
-          min="0"
-          max="90"
         />
       </label>
 
-      <label htmlFor="image-input" className='border border-black'>
-        Imagem:
+      <label htmlFor="image-input" className="p-1">
+        <span>URL - Imagem:</span>
+        <br />
         <input
           type="text"
           data-testid="image-input"
-          className='border border-black'
+          className="border-b border-black w-full"
           name="cardImage"
           onChange={({ target }) => onInputChange(target)}
           value={cardImage}
         />
       </label>
 
-      <label htmlFor="rare-input" className='border border-black'>
-        Raridade:
+      <label htmlFor="rare-input" className="p-2">
+        <span>Raridade:</span>
         <select
           name="cardRare"
           id=""
           data-testid="rare-input"
-          className='border border-black'
+          className="bg-white border-b border-black mx-4 text-center p-1"
           onChange={({ target }) => onInputChange(target)}
           value={cardRare}
         >
@@ -138,26 +139,31 @@ export default function Form(props: PropsForm) {
       </label>
 
       {!hasTrunfo && !checkTrunfo ? (
-        <label htmlFor="trunfo-input" className='border border-black'>
-        Super Trunfo
+        <label htmlFor="trunfo-input" className="flex items-center justify-center p-2">
+          <span>Super Trunfo</span>
           <input
             type="checkbox"
             data-testid="trunfo-input"
-            className='border border-black'
+            className="accent-[#023031] mx-10 my-4"
             name="cardTrunfo"
             onChange={({ target }) => onInputChange(target)}
             checked={cardTrunfo}
           />
         </label>
-      ) : <p>Você já tem um Super Trunfo em seu baralho</p>}
+      ) :
+        <p className="my-4 text-red-600 text-center">
+          Você já tem um Super Trunfo em seu baralho
+        </p>
+      }
 
-      <label htmlFor="save-button" className='border border-black'>
+      <label htmlFor="save-button" className="p-2">
         <button
           type="button"
           data-testid="save-button"
           className={`
-            border border-black bg-[#2FC18C] text-white font-bold
+            bg-[#2FC18C] text-white font-bold
             disabled:bg-gray-200 disabled:text-white disabled:font-bold
+            p-2 w-full rounded-md
           `}
           disabled={isSaveButtonDisabled}
           onClick={onSaveButtonClick}

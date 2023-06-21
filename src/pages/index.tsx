@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import Card from '@/components/Card';
 import Form from '@/components/Form';
 import Head from 'next/head';
+import Image from 'next/image';
+import logo from '../../public/logo_tryunfo.svg';
 import { validateForm } from '../utils/validateForm';
 
 export default function Home() {
@@ -76,78 +78,89 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <>
       <Head>
         <title>Trunfo</title>
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       </Head>
-      <Form
-        cardName={cardName}
-        cardDescription={cardDescription}
-        cardAttr1={cardAttr1}
-        cardAttr2={cardAttr2}
-        cardAttr3={cardAttr3}
-        cardImage={cardImage}
-        cardRare={cardRare}
-        cardTrunfo={cardTrunfo}
-        hasTrunfo={hasTrunfo}
-        isSaveButtonDisabled={isSaveButtonDisabled}
-        onInputChange={onInputChange}
-        onSaveButtonClick={onSaveButtonClick}
-      />
+      <header className="flex justify-center my-10">
+        <Image src={logo} alt="Logo do Card Game Trunfo" className="w-1/2 md:w-1/3" />
+      </header>
+      <div className="p-1 w-11/12 mx-auto">
 
-      <h2>Pré visualização</h2>
+        <section className="bg-white md:flex md:justify-around rounded-xl p-2">
+          <Form
+            cardName={cardName}
+            cardDescription={cardDescription}
+            cardAttr1={cardAttr1}
+            cardAttr2={cardAttr2}
+            cardAttr3={cardAttr3}
+            cardImage={cardImage}
+            cardRare={cardRare}
+            cardTrunfo={cardTrunfo}
+            hasTrunfo={hasTrunfo}
+            isSaveButtonDisabled={isSaveButtonDisabled}
+            onInputChange={onInputChange}
+            onSaveButtonClick={onSaveButtonClick}
+          />
 
-      <Card
-        cardName={cardName}
-        cardDescription={cardDescription}
-        cardAttr1={cardAttr1}
-        cardAttr2={cardAttr2}
-        cardAttr3={cardAttr3}
-        cardImage={cardImage}
-        cardRare={cardRare}
-        cardTrunfo={cardTrunfo}
-      />
+          <div className="md:w-1/2 md:p-2">
+            <h2 className="font-bold my-2 text-center text-[#2FC18C]">Pré visualização</h2>
 
-      <button
-        type="button"
-        onClick={() => setShowCards(!showCards)}
-        className="border border-black"
-      >
-        Mostrar Cartas
-      </button>
+            <Card
+              cardName={cardName}
+              cardDescription={cardDescription}
+              cardAttr1={cardAttr1}
+              cardAttr2={cardAttr2}
+              cardAttr3={cardAttr3}
+              cardImage={cardImage}
+              cardRare={cardRare}
+              cardTrunfo={cardTrunfo}
+            />
+          </div>
+        </section>
 
-      {showCards && (
-        <ul>
-          {cardsList.length > 0 && (
-            cardsList.map((c: any, index: number) => (
-              <li
-                key={`${c.cardName}-${index}`}
-                className="border border-black m-1 p-1"
-              >
-                <Card
-                  cardName={c.cardName}
-                  cardDescription={c.cardDescription}
-                  cardAttr1={c.cardAttr1}
-                  cardAttr2={c.cardAttr2}
-                  cardAttr3={c.cardAttr3}
-                  cardImage={c.cardImage}
-                  cardRare={c.cardRare}
-                  cardTrunfo={c.cardTrunfo}
-                />
-                <button
-                  type="button"
-                  className="border border-black"
-                  onClick={() => deleteCards(index)}
+        <button
+          type="button"
+          onClick={() => setShowCards(!showCards)}
+          className="bg-[#2FC18C] block font-bold my-10 mx-auto p-2 rounded-md text-white w-1/2"
+        >
+          Mostrar Cartas
+        </button>
+
+        {showCards && (
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {cardsList.length > 0 && (
+              cardsList.map((c: any, index: number) => (
+                <li
+                  key={`${c.cardName}-${index}`}
+                  className={`
+                  bg-white border-8 border-[#036B52] flex flex-col justify-between p-1 rounded-md
+                  `}
                 >
-                  Excluir
-                </button>
-              </li>)
-            )
-          )}
-        </ul>
-      )}
-
-    </div>
+                  <Card
+                    cardName={c.cardName}
+                    cardDescription={c.cardDescription}
+                    cardAttr1={c.cardAttr1}
+                    cardAttr2={c.cardAttr2}
+                    cardAttr3={c.cardAttr3}
+                    cardImage={c.cardImage}
+                    cardRare={c.cardRare}
+                    cardTrunfo={c.cardTrunfo}
+                  />
+                  <button
+                    type="button"
+                    className="block bg-[#2FC18C] font-bold rounded-sm p-1 text-white w-full"
+                    onClick={() => deleteCards(index)}
+                  >
+                    Excluir
+                  </button>
+                </li>)
+              )
+            )}
+          </ul>
+        )}
+      </div>
+    </>
   );
 }
