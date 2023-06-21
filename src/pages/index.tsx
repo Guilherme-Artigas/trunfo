@@ -41,7 +41,7 @@ export default function Home() {
 
   useEffect(() => validateForm(card) ? setButton(false) : setButton(true), [card]);
 
-  function onInputChange(target: any) {
+  function onInputChange(target: any): void {
     const { name } = target;
     const value = target.type !== 'checkbox' ? target.value : target.checked;
     setCard({ ...card, [name]: value });
@@ -49,7 +49,7 @@ export default function Home() {
     return;
   }
 
-  function onSaveButtonClick() {
+  function onSaveButtonClick(): void {
     if (cardTrunfo) setHasTrunfo(true);
 
     const newListCards = cardsList.concat({ ...card } as any);
@@ -70,11 +70,23 @@ export default function Home() {
     return;
   }
 
-  function deleteCards(cardIndex: number) {
+  function deleteCards(cardIndex: number): void {
     const filteredCardList = cardsList.filter((_, i) => cardIndex !== i);
     if (!filteredCardList.some(({ cardTrunfo }) => cardTrunfo === true)) setHasTrunfo(false);
     setCardsList(filteredCardList);
     localStorage.setItem('cardsList', JSON.stringify(filteredCardList));
+  }
+
+  function searchCardByName(name: string): void {
+    if (name === '') {
+      const recoveryList = JSON.parse(localStorage.getItem('cardsList') as string);
+      setCardsList(recoveryList);
+    } else {
+      const filteredList = cardsList.filter((c: any) =>
+        c.cardName.toLowerCase().includes(name.toLowerCase())
+      );
+      setCardsList(filteredList);
+    }
   }
 
   return (
@@ -129,36 +141,73 @@ export default function Home() {
         </button>
 
         {showCards && (
-          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {cardsList.length > 0 && (
-              cardsList.map((c: any, index: number) => (
-                <li
-                  key={`${c.cardName}-${index}`}
-                  className={`
-                  bg-white border-8 border-[#036B52] flex flex-col justify-between p-1 rounded-md
-                  `}
+          <>
+            <form className="bg-white my-4 p-1 rounded-md">
+              <h4 className="my-2 text-center">Filtros de busca</h4>
+
+              <label htmlFor="searchName">
+                <input type="text"
+                  placeholder="Busca por nome"
+                  className="border border-[#2FC18C] my-1 p-1 rounded-md text-center w-full"
+                  name="searchName"
+                  onChange={({ target: { value } }) => searchCardByName(value)}
+                />
+              </label>
+
+              <label htmlFor="searchRarity">
+                <select
+                  name="searchRarity"
+                  className="border border-[#2FC18C] my-1 p-1 rounded-md text-center w-full"
                 >
-                  <Card
-                    cardName={c.cardName}
-                    cardDescription={c.cardDescription}
-                    cardAttr1={c.cardAttr1}
-                    cardAttr2={c.cardAttr2}
-                    cardAttr3={c.cardAttr3}
-                    cardImage={c.cardImage}
-                    cardRare={c.cardRare}
-                    cardTrunfo={c.cardTrunfo}
-                  />
-                  <button
-                    type="button"
-                    className="block bg-[#2FC18C] font-bold rounded-sm p-1 text-white w-full"
-                    onClick={() => deleteCards(index)}
+                  <option value="normal">normal</option>
+                  <option value="raro">raro</option>
+                  <option value="muito raro">muito raro</option>
+                </select>
+              </label>
+
+              <label
+                htmlFor="searchTrunfo"
+                className="border border-[#2FC18C] flex items-center justify-center rounded-md p-1"
+              >
+                <span>Buscar Super Trunfo</span>
+                <input
+                  type="checkbox"
+                  name="searchTrunfo"
+                  className="accent-[#023031] mx-5"
+                />
+              </label>
+            </form>
+            <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+              {cardsList.length > 0 && (
+                cardsList.map((c: any, index: number) => (
+                  <li
+                    key={`${c.cardName}-${index}`}
+                    className={`
+                    bg-white border-8 border-[#036B52] flex flex-col justify-between p-1 rounded-md
+                    `}
                   >
-                    Excluir
-                  </button>
-                </li>)
-              )
-            )}
-          </ul>
+                    <Card
+                      cardName={c.cardName}
+                      cardDescription={c.cardDescription}
+                      cardAttr1={c.cardAttr1}
+                      cardAttr2={c.cardAttr2}
+                      cardAttr3={c.cardAttr3}
+                      cardImage={c.cardImage}
+                      cardRare={c.cardRare}
+                      cardTrunfo={c.cardTrunfo}
+                    />
+                    <button
+                      type="button"
+                      className="block bg-[#2FC18C] font-bold rounded-sm p-1 text-white w-full"
+                      onClick={() => deleteCards(index)}
+                    >
+                      Excluir
+                    </button>
+                  </li>)
+                )
+              )}
+            </ul>
+          </>
         )}
       </div>
     </>
