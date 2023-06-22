@@ -119,6 +119,22 @@ export default function Home() {
     return;
   }
 
+  function searchByTrunfo(checked: boolean): void {
+    const recoveryList = JSON.parse(localStorage.getItem('cardsList') as string);
+    const cardTrunfoFound = recoveryList.some((c: any) => c.cardTrunfo === true);
+
+    if (checked && cardTrunfoFound) {
+      const filteredCardList = recoveryList.filter((c: any) => c.cardTrunfo === true);
+      setCardsList(filteredCardList);
+
+      return;
+    }
+
+    setCardsList(recoveryList);
+
+    return;
+  }
+
   return (
     <>
       <Head>
@@ -173,7 +189,7 @@ export default function Home() {
         {showCards && (
           <>
             <form className="bg-white my-4 p-1 rounded-md">
-              <h4 className="my-2 text-center">Filtros de busca</h4>
+              <h4 className="my-2 text-center">Filtros de busca: </h4>
 
               <label htmlFor="searchName">
                 <input type="text"
@@ -206,6 +222,7 @@ export default function Home() {
                   type="checkbox"
                   name="searchTrunfo"
                   className="accent-[#023031] mx-5"
+                  onChange={({ target: { checked } }) => searchByTrunfo(checked)}
                 />
               </label>
             </form>
