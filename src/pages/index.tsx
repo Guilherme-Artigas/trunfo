@@ -89,6 +89,36 @@ export default function Home() {
     }
   }
 
+  function searchByRarity(rarity: string): void {
+    const recoveryList = JSON.parse(localStorage.getItem('cardsList') as string);
+    setCardsList(recoveryList);
+
+    if (rarity === 'normal') {
+      const allCardsNormal = recoveryList.filter((c: any) => c.cardRare === 'normal');
+      setCardsList(allCardsNormal);
+
+      return;
+    }
+
+    if (rarity === 'raro') {
+      const allCardsRare = recoveryList.filter((c: any) => c.cardRare === 'raro');
+      setCardsList(allCardsRare);
+
+      return;
+    }
+
+    if (rarity === 'muito raro') {
+      const allCardsVeryRare = recoveryList.filter((c: any) => c.cardRare === 'muito raro');
+      setCardsList(allCardsVeryRare);
+
+      return;
+    }
+
+    setCardsList(recoveryList);
+
+    return;
+  }
+
   return (
     <>
       <Head>
@@ -158,7 +188,9 @@ export default function Home() {
                 <select
                   name="searchRarity"
                   className="border border-[#2FC18C] my-1 p-1 rounded-md text-center w-full"
+                  onChange={({ target: { value } }) => searchByRarity(value)}
                 >
+                  <option value="todas">todas</option>
                   <option value="normal">normal</option>
                   <option value="raro">raro</option>
                   <option value="muito raro">muito raro</option>
