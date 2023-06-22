@@ -198,6 +198,7 @@ export default function Home() {
                   className="border border-[#2FC18C] my-1 p-1 rounded-md text-center w-full"
                   name="searchName"
                   onChange={({ target: { value } }) => searchCardByName(value)}
+                  data-testid="searchName"
                 />
               </label>
 
@@ -208,6 +209,7 @@ export default function Home() {
                     border border-[#2FC18C] my-1 p-1 rounded-md text-center w-full md:p-[7px]
                   `}
                   onChange={({ target: { value } }) => searchByRarity(value)}
+                  data-testid="searchRarity"
                 >
                   <option value="todas">todas</option>
                   <option value="normal">normal</option>
@@ -229,6 +231,7 @@ export default function Home() {
                   name="searchTrunfo"
                   className="accent-[#023031]"
                   onChange={({ target: { checked } }) => searchByTrunfo(checked)}
+                  data-testid="searchTrunfo"
                 />
               </label>
             </form>
