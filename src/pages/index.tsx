@@ -188,11 +188,12 @@ export default function Home() {
 
         {showCards && (
           <>
-            <form className="bg-white my-4 p-1 rounded-md">
+            <form className="bg-white my-4 p-1 rounded-md md:flex items-center justify-around">
               <h4 className="my-2 text-center">Filtros de busca: </h4>
 
               <label htmlFor="searchName">
-                <input type="text"
+                <input
+                  type="text"
                   placeholder="Busca por nome"
                   className="border border-[#2FC18C] my-1 p-1 rounded-md text-center w-full"
                   name="searchName"
@@ -203,7 +204,9 @@ export default function Home() {
               <label htmlFor="searchRarity">
                 <select
                   name="searchRarity"
-                  className="border border-[#2FC18C] my-1 p-1 rounded-md text-center w-full"
+                  className={`
+                    border border-[#2FC18C] my-1 p-1 rounded-md text-center w-full md:p-[7px]
+                  `}
                   onChange={({ target: { value } }) => searchByRarity(value)}
                 >
                   <option value="todas">todas</option>
@@ -215,13 +218,16 @@ export default function Home() {
 
               <label
                 htmlFor="searchTrunfo"
-                className="border border-[#2FC18C] flex items-center justify-center rounded-md p-1"
+                className={`
+                  border border-[#2FC18C] flex items-center justify-center rounded-md p-1
+                  md:border-none
+                `}
               >
-                <span>Buscar Super Trunfo</span>
+                <span className="mx-1">Buscar Super Trunfo</span>
                 <input
                   type="checkbox"
                   name="searchTrunfo"
-                  className="accent-[#023031] mx-5"
+                  className="accent-[#023031]"
                   onChange={({ target: { checked } }) => searchByTrunfo(checked)}
                 />
               </label>
