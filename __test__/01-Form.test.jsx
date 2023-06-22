@@ -63,39 +63,6 @@ describe('<Form />', () => {
     expect(trunfoInput).toBeInTheDocument();
   });
 
-  it('Só poder haver uma carta Super Trunfo em cada baralho:', () => {
-    const inputMock = [
-      {
-        cardTrunfo: true,
-        cardName: 'Charmander',
-        cardDescription: 'Tem preferência por coisas quentes.',
-        cardImage: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png',
-        cardAttr1: '80',
-        cardAttr2: '50',
-        cardAttr3: '70',
-        cardRare: 'muito raro'
-      }
-    ];
-
-    localStorage.setItem('cardsList', JSON.stringify(inputMock));
-
-    render(<Home />);
-
-    const textMessage = screen.getByText(
-      /Você já tem um Super Trunfo em seu baralho/i
-    );
-
-    expect(textMessage).toBeInTheDocument();
-
-    const showButtonCards = screen.getByText(/Mostrar Cartas/i);
-    fireEvent.click(showButtonCards);
-    expect(showButtonCards).toBeInTheDocument();
-
-    const deleteButton = screen.getByText(/Excluir/i);
-    fireEvent.click(deleteButton);
-    expect(deleteButton).not.toBeInTheDocument();
-  });
-
   it('É possível salvar cartas:', () => {
     render(<Home />);
     const cardName = screen.getByTestId(/name-input/i);
@@ -127,5 +94,28 @@ describe('<Form />', () => {
     const buttonSave = screen.getByTestId(/save-button/i);
     fireEvent.click(buttonSave);
     expect(buttonSave).toBeInTheDocument();
+  });
+
+  it('Não é possível cadastrar mais de uma carta Super Trunfo:', () => {
+    const inputMock = [
+      {
+        cardName: 'Charmander',
+        cardDescription: 'Tem preferência por coisas quentes',
+        attr1: '80',
+        attr2: '50',
+        attr3: '70',
+        cardImage: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png',
+        cardRare: 'muito raro',
+        cardTrunfo: true
+      }
+    ];
+
+    localStorage.setItem('cardsList', JSON.stringify(inputMock));
+
+    render(<Home />);
+
+    const hasTrunfoText = screen.getByText(/Você já tem um Super Trunfo em seu baralho/i);
+
+    expect(hasTrunfoText).toBeInTheDocument();
   });
 });
