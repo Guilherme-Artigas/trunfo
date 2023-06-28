@@ -42,7 +42,7 @@ export default function Form(props: PropsForm) {
   }, []);
 
   return (
-    <form className="flex flex-col md:w-1/2 md:justify-around">
+    <form className="flex flex-col md:justify-around md:p-8 md:w-1/2">
 
       <h1 className="font-bold my-2 text-center text-[#2FC18C]">
         ADICIONE NOVA CARTA

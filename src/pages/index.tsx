@@ -162,7 +162,7 @@ export default function Home() {
             onSaveButtonClick={onSaveButtonClick}
           />
 
-          <div className="md:w-1/2 md:p-2">
+          <div className="md:p-8 md:w-1/2">
             <h2 className="font-bold my-2 text-center text-[#2FC18C]">Pré visualização</h2>
 
             <Card
